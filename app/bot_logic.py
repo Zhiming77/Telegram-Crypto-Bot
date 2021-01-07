@@ -5,6 +5,7 @@ from app.crypto import render_crypto_results
 from uuid import uuid4
 import telegram
 import logging
+import os
 from config import auth
 
 logging.basicConfig(
@@ -316,10 +317,14 @@ def unknown(update, context):
 unknown_handler = MessageHandler(Filters.command, unknown)
 dispatcher.add_handler(unknown_handler)
 
-
+PORT = int(os.environ.get('PORT',5000))
 
 def startBot():
-    updater.start_polling()
+    updater.start_webhook(listen="0.0.0.0",
+                          port=int(PORT),
+                          url_path=auth['telegram_bot_token'])
+    updater.bot.setWebhook('https://doctoraleksandr.herokuapp.com/'+auth['telegram_bot_token'])
+
 
 
 
