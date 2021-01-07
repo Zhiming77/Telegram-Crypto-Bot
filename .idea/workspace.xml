@@ -16,6 +16,28 @@
     <SUITE FILE_PATH="coverage/Plutus$config.coverage" NAME="config Coverage Results" MODIFIED="1609977470115" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/Plutus$Flask__app___init___py_.coverage" NAME="Flask (pluty.py) Coverage Results" MODIFIED="1609977480216" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
+  <component name="DockManager">
+    <window id="3">
+      <content type="file-editors">
+        <state>
+          <leaf>
+            <file leaf-file-name="bot_logic.py" pinned="false" current-in-tab="true">
+              <entry file="file://$PROJECT_DIR$/app/bot_logic.py">
+                <provider selected="true" editor-type-id="text-editor">
+                  <state relative-caret-position="299">
+                    <caret line="57" column="28" lean-forward="true" selection-start-line="57" selection-start-column="28" selection-end-line="57" selection-end-column="28" />
+                    <folding>
+                      <element signature="e#0#110#0" expanded="true" />
+                    </folding>
+                  </state>
+                </provider>
+              </entry>
+            </file>
+          </leaf>
+        </state>
+      </content>
+    </window>
+  </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file leaf-file-name="routes.py" pinned="false" current-in-tab="false">
@@ -63,8 +85,8 @@
       <file leaf-file-name="bot_logic.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/bot_logic.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="406">
-              <caret line="328" lean-forward="true" selection-start-line="328" selection-end-line="328" />
+            <state relative-caret-position="460">
+              <caret line="314" column="68" lean-forward="true" selection-start-line="314" selection-start-column="68" selection-end-line="314" selection-end-column="150" />
               <folding>
                 <element signature="e#0#110#0" expanded="true" />
               </folding>
@@ -89,6 +111,11 @@
         <option value="Python Script" />
       </list>
     </option>
+  </component>
+  <component name="FindInProjectRecents">
+    <findStrings>
+      <find>token</find>
+    </findStrings>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -420,8 +447,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/bot_logic.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="406">
-          <caret line="328" lean-forward="true" selection-start-line="328" selection-end-line="328" />
+        <state relative-caret-position="299">
+          <caret line="57" column="28" lean-forward="true" selection-start-line="57" selection-start-column="28" selection-end-line="57" selection-end-column="28" />
           <folding>
             <element signature="e#0#110#0" expanded="true" />
           </folding>

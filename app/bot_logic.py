@@ -25,6 +25,8 @@ def inlinequery(update: Update, context: CallbackContext) -> None:
         return
 
     current_prices = render_crypto_results()
+    template = "".join([f"\n_*{token.upper()}: ${current_prices[token]}*_" for token in current_prices.keys() if
+                        int(current_prices[token]) != 0])
 
     results = [
 
@@ -50,6 +52,14 @@ def inlinequery(update: Update, context: CallbackContext) -> None:
             thumb_width=30,
             thumb_height=30
 
+        ),
+
+        InlineQueryResultArticle(
+            id=str(uuid4()),
+            title="SUGGESTED PICKS",
+            input_message_content=InputTextMessageContent(
+                f"*Current Crypto Prices*:\n{template}", parse_mode=telegram.ParseMode.MARKDOWN_V2
+            )
         ),
 
         InlineQueryResultArticle(
@@ -160,7 +170,7 @@ def inlinequery(update: Update, context: CallbackContext) -> None:
 dispatcher.add_handler(InlineQueryHandler(inlinequery))
 
 def start(update, context):
-    context.bot.send_message(chat_id=update.effective_chat.id, text="Привет, I'm Plutus, your personal crypto connoseiur")
+    context.bot.send_message(chat_id=update.effective_chat.id, text="Привет, I'm Aleksandr, your personal crypto connoseiur")
 
 start_handler = CommandHandler('start', start)
 dispatcher.add_handler(start_handler)
