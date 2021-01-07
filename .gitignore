@@ -1,0 +1,4 @@
+Plutus
+__pycache__
+*.ini
+*.env
