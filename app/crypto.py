@@ -1,6 +1,7 @@
 from requests import Session
 import configparser
 import json
+import re
 from requests.exceptions import ConnectionError, Timeout, TooManyRedirects
 
 def get_api_key():
@@ -39,22 +40,32 @@ def render_crypto_results():
 
     current_prices ={}
 
-    current_prices['btc'] = "{0:.0f}".format(data['data']['BTC']['quote']['USD']['price'])
-    current_prices['eth'] = "{0:.0f}".format(data['data']['ETH']['quote']['USD']['price'])
-    current_prices['usdt'] = "{0:.0f}".format(data['data']['USDT']['quote']['USD']['price'])
-    current_prices['ltc'] = "{0:.0f}".format(data['data']['LTC']['quote']['USD']['price'])
-    current_prices['uni'] = "{0:.0f}".format(data['data']['UNI']['quote']['USD']['price'])
-    current_prices['comp'] = "{0:.0f}".format(data['data']['COMP']['quote']['USD']['price'])
-    current_prices['nxm'] = "{0:.0f}".format(data['data']['NXM']['quote']['USD']['price'])
-    current_prices['atom'] = "{0:.0f}".format(data['data']['ATOM']['quote']['USD']['price'])
-    current_prices['ren'] = "{0:.0f}".format(data['data']['REN']['quote']['USD']['price'])
-    current_prices['mkr'] = "{0:.0f}".format(data['data']['MKR']['quote']['USD']['price'])
-    current_prices['yfi'] = "{0:.0f}".format(data['data']['YFI']['quote']['USD']['price'])
-    current_prices['aave'] = "{0:.0f}".format(data['data']['AAVE']['quote']['USD']['price'])
-    current_prices['sushi'] = "{0:.0f}".format(data['data']['SUSHI']['quote']['USD']['price'])
-    current_prices['xrp'] = "{0:.0f}".format(data['data']['XRP']['quote']['USD']['price'])
-    current_prices['ada'] = "{0:.0f}".format(data['data']['ADA']['quote']['USD']['price'])
+    current_prices['btc'] = "{0:.2f}".format(data['data']['BTC']['quote']['USD']['price'])
+    current_prices['eth'] = "{0:.2f}".format(data['data']['ETH']['quote']['USD']['price'])
+    current_prices['usdt'] = "{0:.2f}".format(data['data']['USDT']['quote']['USD']['price'])
+    current_prices['ltc'] = "{0:.2f}".format(data['data']['LTC']['quote']['USD']['price'])
+    current_prices['uni'] = "{0:.2f}".format(data['data']['UNI']['quote']['USD']['price'])
+    current_prices['comp'] = "{0:.2f}".format(data['data']['COMP']['quote']['USD']['price'])
+    current_prices['nxm'] = "{0:.2f}".format(data['data']['NXM']['quote']['USD']['price'])
+    current_prices['atom'] = "{0:.2f}".format(data['data']['ATOM']['quote']['USD']['price'])
+    current_prices['ren'] = "{0:.2f}".format(data['data']['REN']['quote']['USD']['price'])
+    current_prices['mkr'] = "{0:.2f}".format(data['data']['MKR']['quote']['USD']['price'])
+    current_prices['yfi'] = "{0:.2f}".format(data['data']['YFI']['quote']['USD']['price'])
+    current_prices['aave'] = "{0:.2f}".format(data['data']['AAVE']['quote']['USD']['price'])
+    current_prices['sushi'] = "{0:.2f}".format(data['data']['SUSHI']['quote']['USD']['price'])
+    current_prices['xrp'] = "{0:.2f}".format(data['data']['XRP']['quote']['USD']['price'])
+    current_prices['ada'] = "{0:.2f}".format(data['data']['ADA']['quote']['USD']['price'])
 
 
+    current_prices = {symbol: cleanPriceData(price) for symbol, price in current_prices.items()}
 
     return (current_prices)
+
+
+def cleanPriceData(price):
+    cleanr = re.compile(r'\.{1}')
+    cleantext = re.sub(cleanr, r'\.', price)
+    return cleantext
+
+
+
