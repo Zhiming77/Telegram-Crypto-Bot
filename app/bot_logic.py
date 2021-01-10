@@ -25,8 +25,7 @@ def inlinequery(update: Update, context: CallbackContext) -> None:
         return
 
     current_prices = render_crypto_results()
-    template = "".join([f"\n_*{token.upper()}: ${current_prices[token]}*_" for token in current_prices.keys() if
-                        int(current_prices[token]) != 0])
+    template = "".join([f"\n_*{token.upper()}: ${current_prices[token]}*_" for token in current_prices.keys()])
 
     results = [
 
