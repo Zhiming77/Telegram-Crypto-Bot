@@ -4,16 +4,17 @@ import json
 import re
 from requests.exceptions import ConnectionError, Timeout, TooManyRedirects
 
+_symbols = ['btc', 'eth','usdt','ltc','uni','comp','nxm','atom','ren','mkr','yfi','aave','sushi','xrp','ada','zec','crv','snx','rune','sol','lrc','sc','grt','uma']
+
 def get_api_key():
     config = configparser.ConfigParser()
     config.read('config.ini')
     return config['coinmarketcap']['api']
 
-def get_crypto_price(api_key):
-
+def get_crypto_price(api_key, symbols):
     url = 'https://pro-api.coinmarketcap.com/v1/cryptocurrency/quotes/latest'
     parameters ={
-        'symbol':'BTC,ETH,USDT,XRP,LTC,ADA,UNI,COMP,NXM,ATOM,REN,MKR,YFI,AAVE,SUSHI'
+        'symbol': ','.join([_symbol.upper() for _symbol in _symbols])
     }
 
     headers = {
@@ -36,27 +37,12 @@ def get_crypto_price(api_key):
 def render_crypto_results():
 
     api_key = get_api_key()
-    data = get_crypto_price(api_key)
+    data = get_crypto_price(api_key, _symbols)
 
-    current_prices ={}
+    #creation of price dictionary via comprehension
+    current_prices ={_symbol:"{0:.2f}".format(data['data'][_symbol.upper()]['quote']['USD']['price']) for _symbol in _symbols}
 
-    current_prices['btc'] = "{0:.2f}".format(data['data']['BTC']['quote']['USD']['price'])
-    current_prices['eth'] = "{0:.2f}".format(data['data']['ETH']['quote']['USD']['price'])
-    current_prices['usdt'] = "{0:.2f}".format(data['data']['USDT']['quote']['USD']['price'])
-    current_prices['ltc'] = "{0:.2f}".format(data['data']['LTC']['quote']['USD']['price'])
-    current_prices['uni'] = "{0:.2f}".format(data['data']['UNI']['quote']['USD']['price'])
-    current_prices['comp'] = "{0:.2f}".format(data['data']['COMP']['quote']['USD']['price'])
-    current_prices['nxm'] = "{0:.2f}".format(data['data']['NXM']['quote']['USD']['price'])
-    current_prices['atom'] = "{0:.2f}".format(data['data']['ATOM']['quote']['USD']['price'])
-    current_prices['ren'] = "{0:.2f}".format(data['data']['REN']['quote']['USD']['price'])
-    current_prices['mkr'] = "{0:.2f}".format(data['data']['MKR']['quote']['USD']['price'])
-    current_prices['yfi'] = "{0:.2f}".format(data['data']['YFI']['quote']['USD']['price'])
-    current_prices['aave'] = "{0:.2f}".format(data['data']['AAVE']['quote']['USD']['price'])
-    current_prices['sushi'] = "{0:.2f}".format(data['data']['SUSHI']['quote']['USD']['price'])
-    current_prices['xrp'] = "{0:.2f}".format(data['data']['XRP']['quote']['USD']['price'])
-    current_prices['ada'] = "{0:.2f}".format(data['data']['ADA']['quote']['USD']['price'])
-
-
+    #removal of characters that don't comply with Telegram MARKUP V2
     current_prices = {symbol: cleanPriceData(price) for symbol, price in current_prices.items()}
 
     return (current_prices)
@@ -66,6 +52,7 @@ def cleanPriceData(price):
     cleanr = re.compile(r'\.{1}')
     cleantext = re.sub(cleanr, r'\.', price)
     return cleantext
+
 
 
 
