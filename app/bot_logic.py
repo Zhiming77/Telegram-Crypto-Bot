@@ -25,7 +25,7 @@ def inlinequery(update: Update, context: CallbackContext) -> None:
         return
 
     current_prices = render_crypto_results()
-    template = "".join([f"\n_*{token.upper()}: ${current_prices[token]}*_" for token in current_prices.keys()])
+    template = "".join([f"\n*{token.upper()}*: _*${current_prices[token]}*_" for token in current_prices.keys()])
 
     results = [
 
@@ -310,7 +310,7 @@ dispatcher.add_handler(sushi_price_handler)
 def allPrice(update, context):
 
     current_prices = render_crypto_results()
-    template ="".join([f"\n_*{token.upper()}: ${current_prices[token]}*_" for token in current_prices.keys()])
+    template ="".join([f"\n*{token.upper()}*: _*${current_prices[token]}*_" for token in current_prices.keys()])
     context.bot.send_message(chat_id=update.effective_chat.id, text=f"*Current Crypto Prices*:\n{template}", parse_mode=telegram.ParseMode.MARKDOWN_V2)
 
 all_price_handler = CommandHandler('all', allPrice)

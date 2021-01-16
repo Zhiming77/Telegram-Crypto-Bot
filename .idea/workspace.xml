@@ -2,8 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="229b0c33-68eb-4efb-a229-e12e17fb2b02" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/crypto.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/crypto.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/bot_logic.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/bot_logic.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -228,7 +227,7 @@
       <workItem from="1610286802157" duration="83000" />
       <workItem from="1610286904727" duration="3268000" />
       <workItem from="1610545275179" duration="691000" />
-      <workItem from="1610814489868" duration="3130000" />
+      <workItem from="1610814489868" duration="3519000" />
     </task>
     <servers />
   </component>
