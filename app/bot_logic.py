@@ -137,24 +137,7 @@ def inlinequery(update: Update, context: CallbackContext) -> None:
             thumb_url='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS671T5rBIRNGvv3C7g8FbR8aH9ccwGiMS3kQ&usqp=CAU',
             thumb_width=30,
             thumb_height=30
-        ),
-
-        InlineQueryResultArticle(
-            id=str(uuid4()),
-            title="XRP",
-            input_message_content=InputTextMessageContent(
-                f"Current Price:\n_*XRP: ${current_prices['xrp']}*_", parse_mode=telegram.ParseMode.MARKDOWN_V2
-            )
-        ),
-
-        InlineQueryResultArticle(
-            id=str(uuid4()),
-            title="ADA",
-            input_message_content=InputTextMessageContent(
-                f"Current Price:\n_*ADA: ${current_prices['ada']}*_", parse_mode=telegram.ParseMode.MARKDOWN_V2
-            )
-        ),
-
+        )
     ]
 
     update.inline_query.answer(results)
