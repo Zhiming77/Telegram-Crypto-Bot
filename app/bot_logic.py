@@ -61,13 +61,6 @@ def inlinequery(update: Update, context: CallbackContext) -> None:
             )
         ),
 
-        InlineQueryResultArticle(
-            id=str(uuid4()),
-            title="LTC",
-            input_message_content=InputTextMessageContent(
-                f"Current Price:\n_*LTC: ${current_prices['ltc']}*_", parse_mode=telegram.ParseMode.MARKDOWN_V2
-            )
-        ),
 
         InlineQueryResultArticle(
             id=str(uuid4()),
@@ -211,29 +204,6 @@ def usdtPrice(update, context):
 usdt_price_handler = CommandHandler('tether', usdtPrice)
 dispatcher.add_handler(usdt_price_handler)
 
-def xrpPrice(update, context):
-
-    current_prices = render_crypto_results()
-    context.bot.send_message(chat_id=update.effective_chat.id, text=f"Current Price:\n_*XRP: ${current_prices['xrp']}*_", parse_mode=telegram.ParseMode.MARKDOWN_V2)
-
-xrp_price_handler = CommandHandler('xrp', xrpPrice)
-dispatcher.add_handler(xrp_price_handler)
-
-def ltcPrice(update, context):
-
-    current_prices = render_crypto_results()
-    context.bot.send_message(chat_id=update.effective_chat.id, text=f"Current Price:\n_*LTC: ${current_prices['ltc']}*_", parse_mode=telegram.ParseMode.MARKDOWN_V2)
-
-ltc_price_handler = CommandHandler('ltc', ltcPrice)
-dispatcher.add_handler(ltc_price_handler)
-
-def adaPrice(update, context):
-
-    current_prices = render_crypto_results()
-    context.bot.send_message(chat_id=update.effective_chat.id, text=f"Current Price:\n_*ADA: ${current_prices['ada']}*_", parse_mode=telegram.ParseMode.MARKDOWN_V2)
-
-ada_price_handler = CommandHandler('ada', adaPrice)
-dispatcher.add_handler(ada_price_handler)
 
 def uniPrice(update, context):
 
