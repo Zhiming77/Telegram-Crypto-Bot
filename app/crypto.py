@@ -4,7 +4,7 @@ import json
 import re
 from requests.exceptions import ConnectionError, Timeout, TooManyRedirects
 
-_symbols = ['btc', 'eth','usdt','ltc','uni','comp','nxm','atom','ren','mkr','yfi','aave','sushi','xrp','ada','zec','crv','snx','rune','sol','lrc','sc','grt','uma']
+_symbols = ['btc', 'eth','usdt','uni','comp','nxm','atom','ren','mkr','yfi','aave','sushi','zec','crv','snx','rune','sol','lrc','sc','grt','uma']
 
 def get_api_key():
     config = configparser.ConfigParser()
