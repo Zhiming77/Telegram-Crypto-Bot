@@ -1,11 +1,12 @@
 from telegram.ext import MessageHandler, Filters, InlineQueryHandler, CommandHandler, CallbackContext, Updater
 from telegram import InlineQueryResultArticle, InlineQueryResultCachedGif, InputTextMessageContent, ParseMode, Update
 from telegram.utils.helpers import escape_markdown
-from app.crypto import render_crypto_results
+from app.crypto import render_crypto_results, set_schedule
 from uuid import uuid4
 import telegram
 import logging
 import os
+import sqlite3
 from config import auth
 
 logging.basicConfig(
@@ -16,6 +17,16 @@ logger = logging.getLogger(__name__)
 
 updater = Updater(token=auth['telegram_bot_token'], use_context=True)
 dispatcher = updater.dispatcher
+
+price_alert_set = False
+#create the database file in the app's file system
+db_file = 'price_alerts.db'
+if not os.path.exists(db_file):
+    conn = sqlite3.connect(db_file)
+    conn.execute('CREATE TABLE alerts (id INTEGER PRIMARY KEY, chat_id INTEGER, threshold REAL)')
+    conn.close()
+
+db_path = os.path.abspath(db_file)
 
 def inlinequery(update: Update, context: CallbackContext) -> None:
 
@@ -149,6 +160,31 @@ def start(update, context):
 
 start_handler = CommandHandler('start', start)
 dispatcher.add_handler(start_handler)
+
+def set_alert(update, context):
+    context.bot.send_message(chat_id=update.effective_chat.id, text="Please enter the desired price threshold")
+
+alert_handler = CommandHandler('alert', set_alert)
+dispatcher.add_handler(alert_handler)
+
+threshold = 00000.0000
+
+def handle_threshold(update, context):
+    threshold = update.message.next
+    conn = sqlite3.connect(db_path)
+    chat_id=update.effective_chat.id
+    conn.execute("INSERT INTO alerts (chat_id, threshold), VALUES (?,?)", (chat_id, threshold))
+    conn.commit()
+    conn.close()
+    set_schedule(True)
+    context.bot.send_message(chat_id=update.effective_chat.id, text="Price alert set. Alert threshold set to {}".format(threshold))
+
+dispatcher.add_handler(MessageHandler(Filters.text & ~Filters.command, handle_threshold))
+
+def threshold_reached(update, context):
+    context.bot.send_message(chat_id=update.effective_chat.id, text=f"The current _*price of BTC has now reached ${threshold}*_")
+
+dispatcher.add_handler(MessageHandler(Filters.text & ~Filters.command, threshold_reached))
 
 def help(update, context):
     context.bot.send_message(chat_id=update.effective_chat.id, text="If you need help ask Ben!")
