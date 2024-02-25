@@ -29,7 +29,31 @@ def inlinequery(update: Update, context: CallbackContext) -> None:
 
     results = [
 
+        InlineQueryResultArticle(
+            id=str(uuid4()),
+            title="BTC",
+            input_message_content=InputTextMessageContent(
+                f"Current Price:\n_*BTC: ${current_prices['btc']}*_", parse_mode=ParseMode.MARKDOWN_V2
+            ),
+            thumb_url='https://pbs.twimg.com/profile_images/826820245134258176/XMOBC_oB_400x400.jpg',
+            thumb_width=30,
+            thumb_height=30
 
+        ),
+
+        InlineQueryResultArticle(
+            id=str(uuid4()),
+            title="ETH",
+            input_message_content=InputTextMessageContent(
+                f"Current Price:\n_*ETH: ${current_prices['eth']}*_", parse_mode=telegram.ParseMode.MARKDOWN_V2
+            ),
+            thumb_url='https://img.block123.com/nav/images/cea0d6c1-fefc-52fc-aca3-21c31fdd239b_2ReDnBD.jpg',
+            thumb_width=30,
+            thumb_height=30
+
+        ),
+
+        
     ]
 
     update.inline_query.answer(results)
