@@ -4,7 +4,7 @@ import json
 import re
 from requests.exceptions import ConnectionError, Timeout, TooManyRedirects
 
-_symbols = ['btc', 'eth','usdt','uni','comp','nxm','atom','ren','mkr','yfi','aave','sushi','zec','crv','snx','rune','sol','lrc','sc','grt','uma']
+_symbols = ['btc', 'eth','usdt']
 
 def get_api_key():
     config = configparser.ConfigParser()
@@ -52,3 +52,4 @@ def cleanPriceData(price):
     cleanr = re.compile(r'\.{1}')
     cleantext = re.sub(cleanr, r'\.', price)
     return cleantext
+
